@@ -1,0 +1,179 @@
+---
+title: "LinkedIn Phrases Analysis"
+output: html_document
+date: "2023-09-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(textrank)
+library(wordcloud)
+library(udpipe)
+```
+
+Loading in data
+```{r}
+jobs <- read.csv("job_postings.csv")
+
+jobs_copy <- read.csv("job_postings.csv")
+
+```
+
+1. Perform EDA
+  Summary function. Mention the NAs. 
+
+```{r pressure, echo=FALSE}
+jobs[ jobs == '' ] <- NA 
+
+dim( jobs )
+# 15,886 rows and 27 columns 
+
+summary( jobs ) # shows distribution of rows, types of data in rows, and amount of NAs 
+
+str( jobs ) 
+```
+
+Deciding relevant parameters w/ explanation for dropped parameters 
+```{r}
+# Creating column index. Helps when choosing which columns to drop
+jobs_col_index <- tibble( colnames( jobs ) ) 
+
+# jobs_df <- jobs[ , -c( ) ]
+# Columns I'm dropping
+# 2 - company_id, we don't have a use to know which companies are which
+# 3 - title, there are too many titles to collapse them into a few categories: length( unique( jobs$title ) )
+# 5-7 - there's tons of missing data for our salary variables
+# 8, pay_period - doesn't seem relevant, 9,000 NAs
+# 9, formatted_work_type - this variable and work_type are the same 
+# 10, location - too many different locations, over 3000
+# 12, original_listed_time - nonsense
+# 13, remote_allowed - +13,500 NAs, would be interesting to see how this correlated with applies 
+# 14, views - could be useful later, but applies is a better indicator of job interest than views
+# 15-19 & 21-24 - unrelated to our research question
+# 26-27 - unrelated
+
+table(jobs$work_type)
+#length(table( jobs$remote_allowed ))
+
+#table( jobs$compensation_type)
+
+#sum(is.na(jobs$work_type))
+
+#sum(is.na(jobs$formatted_work_type))
+
+```
+
+
+```{r} 
+# In this block of code I am testing whether we can replace empty string cells with NAs 
+# so we can later drop them. We can! Run the code below and see for yourself. 
+jobs_copy[ jobs_copy == '' ] <- NA 
+
+summary( jobs_copy ) # For some reason, this function doesn't display the NAs of string variables
+                     # So I had to manually calculate the NAs below to make sure it worked. 
+
+table( jobs_copy$pay_period ) 
+
+sum(is.na( jobs_copy$pay_period ) )
+
+sum(is.na( jobs$pay_period ) )
+```
+
+Correcting Variable Classes
+```{r}
+table(jobs$formatted_work_type )
+
+jobs[ , c( 20, 25 ) ] <- lapply( jobs[ , c( 20, 25  ) ] , as.factor )
+
+#str(jobs)
+```
+
+
+Dropping columns and removing NAs
+```{r}
+# Dropping columns
+jobs_df <- jobs[ , -c( 2, 3, 5:10, 12:19, 21:24, 26, 27 ) ]
+
+# Removing NAs
+jobs_df <- jobs_df[ complete.cases( jobs_df ) , ]
+
+# Make all descriptions fully lowercase 
+jobs_df$description <- tolower(jobs_df$description)
+
+summary(jobs_df$applies)
+```
+
+Subsetting the applies column into "low" & "high"
+```{r}
+jobs_df$applies_factor <- cut(jobs_df$applies, breaks = c(-1, 6, 1616), labels = c("low", "high"))
+# low: [ 0, 6 ] so a job with 6 applications is considered low 
+# high: (6 , 1615 ] a job that received 7 or more applications is considered high 
+```
+
+```{r}
+# Split data into "low" and "high" subsets
+low_applications <- jobs_df[jobs_df$applies_factor == "low", ]
+high_applications <- jobs_df[jobs_df$applies_factor == "high", ]
+
+# Download the English model for udpipe
+ud_model <- udpipe_download_model(language = "english", overwrite = FALSE)
+udpipe_model <- udpipe_load_model(ud_model$file_model)
+
+# Combine all the 'description' into one text string for "low" applications
+description_text_low <- paste(low_applications$description, collapse = " ")
+
+# Annotate the text using udpipe for "low" applications
+annotated_text_low <- udpipe_annotate(udpipe_model, x = description_text_low)
+
+# Create a data frame from the annotated text for "low" applications
+df_low <- as.data.frame(annotated_text_low)
+
+# Convert 'upos' to 'phrase_tag' for "low" applications
+df_low$phrase_tag <- as_phrasemachine(df_low$upos, type = "upos")
+
+# Perform keyword phrase analysis for "low" applications
+stats_low <- keywords_phrases(x = df_low$phrase_tag, term = df_low$token, 
+                              pattern = "(A|N)+N(P+D*(A|N)*N)*", 
+                              is_regex = TRUE, ngram_max = 4, detailed = FALSE)
+```
+
+```{r}
+# Combine all the 'description' into one text string for "high" applications
+description_text_high <- paste(high_applications$description, collapse = " ")
+
+# Annotate the text using udpipe for "high" applications
+annotated_text_high <- udpipe_annotate(udpipe_model, x = description_text_high)
+
+# Create a data frame from the annotated text for "high" applications
+df_high <- as.data.frame(annotated_text_high)
+
+# Convert 'upos' to 'phrase_tag' for "high" applications
+df_high$phrase_tag <- as_phrasemachine(df_high$upos, type = "upos")
+
+# Perform keyword phrase analysis for "high" applications
+stats_high <- keywords_phrases(x = df_high$phrase_tag, term = df_high$token, 
+                               pattern = "(A|N)+N(P+D*(A|N)*N)*", 
+                               is_regex = TRUE, ngram_max = 4, detailed = FALSE)
+```
+
+```{r}
+# Print the first few rows of 'low' and 'high' application keyword stats
+cat("Low Applications:\n")
+View(subset(stats_low, ngram > 2))
+
+cat("\nHigh Applications:\n")
+View(subset(stats_high, ngram > 2))
+```
+
+
+
+
+
+
+
+
+
+
