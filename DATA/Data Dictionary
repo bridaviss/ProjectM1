@@ -1,1 +1,9 @@
+# Data Variable Dictionary
 
+1.) "job_id" – the job ID as defined by LinkedIn (https://www.linkedin.com/jobs/view/)
+2.) "description" – job description
+3.) "applies" – number of applications that have been submitted
+4.) "formatted_experience_level" – job experience level (entry, associate, executive,
+etc.)
+5.) "work_type" – type of work associated with the jobs (full-time, internship, contract,
+etc.)
