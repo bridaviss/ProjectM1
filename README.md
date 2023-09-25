@@ -24,9 +24,8 @@ the same data. The methods are as follows:
 
 ## [SRC Section](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
 
-### [Installing/Building Our Code](https://www.kaggle.com/datasets/arshkon/linkedin-job-postings):
-- You can download the data set here: https://www.kaggle.com/datasets/arshkon/linkedin-job-postings 
-- We are using the job_postings.csv 
+### [Installing/Building Our Code]():
+
 
 
 ### [Usuage of Our Code](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
@@ -45,7 +44,9 @@ the same data. The methods are as follows:
 
 
 
-## [DATA Section](https://github.com/bridaviss/ProjectM1/tree/main/DATA):
+## [DATA Section](https://www.kaggle.com/datasets/arshkon/linkedin-job-postings):
+- You can download the data set here: https://www.kaggle.com/datasets/arshkon/linkedin-job-postings or click the section header
+- We are using the job_postings.csv 
 
 
 ## [FIGURES Section](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES):
