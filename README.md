@@ -22,10 +22,13 @@ the same data. The methods are as follows:
 4. A reference section containing all acknolwedgments and references.
 
 ## [SRC Section](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
-### Installing/Building Our Code:
+
+### [Installing/Building Our Code](https://www.kaggle.com/datasets/arshkon/linkedin-job-postings):
+- You can download the data set here: https://www.kaggle.com/datasets/arshkon/linkedin-job-postings 
+- We are using the job_postings.csv 
 
 
-### Usuage of Our Code:
+### [Usuage of Our Code](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
 1. The goal of this analysis was to provide the audience with key qualitative factors that may differientiate Linkedin job postings that had a higher quantity of applications from a lower quantity of applications.
    - To do this, we performed three analyses:
        1. Phrases Extraction
