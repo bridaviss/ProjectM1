@@ -1,0 +1,119 @@
+---
+title: "Analysis Code"
+output: html_document
+date: "2023-09-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(udpipe)
+library(textrank)
+```
+
+Exploratory graphs
+```{r}
+applies_hist <- ggplot( jobs_df , aes( x = applies ) )+
+  geom_histogram() + 
+  labs(
+    title = "Histogram of Job Applications" , 
+    subtitle = "Most job applications are have less than 100 applications"
+  )
+applies_hist
+
+exp_bar <- ggplot( jobs_df , aes( x = formatted_experience_level ) )+
+  geom_bar() + 
+  labs(
+    title = "Bar Chart of Work Experience" , 
+    subtitle = "Much of our data is from mid-senior level job postings"
+  )
+exp_bar
+
+
+wrktyp_bar <- ggplot( jobs_df , aes( x = work_type ) )+
+  geom_bar() + 
+  labs(
+    title = "Bar Chart of the Work Type" , 
+    subtitle = "Most of the job postings are for full time jobs"
+  )
+wrktyp_bar
+```
+
+Analysis: RAKE method
+
+1. Annotating df_high using udpipe 
+```{r}
+jobs_model <- udpipe_download_model( language = "english" ) # download model, it will 
+                                                            # install locally
+
+jobs_model <- udpipe_load_model( jobs_model$file_model ) # load the model in using your text data
+
+# Splits the "high" text data into paragraphs, sentences, and individual words ready for analysis
+x <- udpipe_annotate( jobs_model, x = df_high$description ) # run the model on your text data
+x <- as.data.frame( x ) 
+
+```
+
+2. Performing Keyword Rake Analysis for high subset
+```{r}
+# Performs Rake analysis - details on what rake analysis is can be found in our references page on Git
+stats_x <- keywords_rake( x = x, 
+                      term = "token", group = c("doc_id" ,"paragraph_id", "sentence_id" ), 
+                      relevant = x$upos %in% c( "NOUN", "ADJ" ),
+                      ngram_max = 4 )
+
+# Subsetting by high frequency and high rake score words. Details as to how are below.
+impact_words_high <- subset( stats_x , rake > 2.524 & freq > 6.0 & ngram >= 2 )
+impact_words_high 
+#fivenum_x_rake <- summary( stats_x$rake )
+
+# rake of 2.524 is the third quartile number
+# freq 6.0 is the third quartile number
+
+# we want words that appear frequently and a high rake score (the ratio of how many times it 
+# co-occurs with other words to the word frequency)
+# frequency and rake score are interlinked but by subsetting by a high frequency, we're 
+# less likely to receive words that have a high word degree and a low frequency 
+
+# Other notes: some words have very high frequencies so the mean is heavily skewed up
+
+# Significant trends/ words:
+#   1. Employee stock purchase plans 
+#   2. Equal opportunity employer
+#   3. Employee Rewards packages 
+#   4. Corporate responsiblity 
+#   5. Communication skills
+#   6. Analytical skills i.e. problem solving
+#   7. project management skills
+#   8. tuition reimbursement
+#   9. flexible spending accounts
+
+```
+
+
+3. Annotating df_low with ud_pipe
+```{r}
+# Splits the "low" text data into paragraphs, sentences, and individual words ready for analysis
+y <- udpipe_annotate( jobs_model, x = df_low$description ) # 
+y <- as.data.frame( y )
+```
+
+4. Performing RAKE analysis of df_low
+```{r}
+# Performs Rake analysis - details on what rake analysis is can be found in our references page on Git
+stats_y <- keywords_rake( y, 
+                      term = "token", group = c("doc_id" ,"paragraph_id", "sentence_id" ), 
+                      relevant = y$upos %in% c( "NOUN", "ADJ" ),
+                      ngram_max = 4 )
+
+fivenum_y_rake <- summary( stats_y$rake ) # 
+fivenum_y_rake
+
+fivenum_y_freq <- summary( stats_y$freq )
+fivenum_y_freq
+
+impact_words_low <- subset( stats_y , rake > 2.594 & freq > 6.0 & ngram >= 2 ) 
+# 2.594 and 6.0 are the third quartile numbers for each variable respectively
+
+View(impact_words_low) # No discernible differences between the high and low impact words
