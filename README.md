@@ -25,7 +25,7 @@ the same data. The methods are as follows:
 ## [SRC Section](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
 
 ### [Installing/Building Our Code](https://github.com/bridaviss/ProjectM1/tree/main/SRC/Code%20Installation%20%26%20Cleaning):
-The Data Cleaning for RAKE and Phrases.Rmd is the data cleaning code for the phrases extraction **and** RAKE method. The data cleaning for these two files are the same, so 
+The 'Data Cleaning for RAKE and Phrases.Rmd' is the data cleaning code for the phrases extraction **and** RAKE method. The data cleaning for these two files are the same, so 
 the cleaning code is included as one file for each of the two methods. Once you have this data cleaning code, you can head on down to the Usage of Our Code section and download either the phrases extraction or RAKE method files, and perform the analysis. 
 
 The data cleaning for the co-occurrence frequency method is slightly different: the data cleaning is included in one file. You do not need to download a separate file to clean the 
