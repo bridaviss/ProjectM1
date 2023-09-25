@@ -55,5 +55,12 @@ co-occurrence frequency data, it is already apart of the main file you will find
 
 ## [FIGURES Section](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES):
 
+### Table of Contents:
+1. [Phrases Extraction]():
+   - Key Takeaways: 
+2. [Co-occurence Frequency]():
+   - Key Takeaways: 
+3. [Rapid Automatic Keyword Extraction]():
+   - Key Takeways:
 
 ## REFERENCES Section
