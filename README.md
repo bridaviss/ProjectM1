@@ -63,6 +63,6 @@ co-occurrence frequency data, it is already apart of the main file you will find
 2. [Co-occurence Frequency](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/Co-occurence%20Frequency):
    - Key Takeaways: This analysis examined the relationship between words that frequently appeared in the same sentence by looking at the top thirty words that had the highest frequency occurence rating. When doing this analysis and comparing our datasets of lower vs. higher quantity of applications, we found that there was a lot of similarity within the two graphs. However for job postings that had a higher quantity of applications, there was a larger numbers of words that appeared near "team", "experience", and "skill" and the strength of these associations were stronger. 
 3. [Rapid Automatic Keyword Extraction](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/RAKE%20Method%20Figures):
-   - Key Takeways:
+   - Key Takeways: This method of analysis gives individual words and phrases scores based on their co-occurence with other words and the frequency of which they show up in the text. There were not major differences when comparing the "low" and "high" subsets of data. The phrases and words that had a good combinaiton of rake and frequency values did not seem to differ between the two subsets. 
 
 ## REFERENCES Section
