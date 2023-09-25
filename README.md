@@ -7,7 +7,8 @@ lower quantity. We hypothesize that job postings that have a higher number of ap
 will be more detailed in summary and more descriptive in adjectives. We will be using
 three different methods of keyword extraction as our text analysis.
 
-### What you will find in this repo:
+### What you will find in this repo: 
+Each section header will direct you to the respective folder.
 1. A section containg our source code and how to use and install it: SRC. Within it, you will find three different rmd files that performs three different methods of analysis. Each file contains code for cleaning 
 the same data. The methods are as follows:
 - RAKE (Rapid Automatic Keyword Extraction): looks for keywords by looking to a sequence of words and excludes irrelevant words. 
