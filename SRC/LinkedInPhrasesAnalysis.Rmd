@@ -160,7 +160,7 @@ stats_high <- keywords_phrases(x = df_high$phrase_tag, term = df_high$token,
 ```
 
 ```{r}
-# Print the first few rows of 'low' and 'high' application keyword stats
+# View the 'low' and 'high' application keyword stats
 cat("Low Applications:\n")
 View(subset(stats_low, ngram > 2))
 
