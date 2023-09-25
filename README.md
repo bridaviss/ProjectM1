@@ -65,4 +65,9 @@ co-occurrence frequency data, it is already apart of the main file you will find
 3. [Rapid Automatic Keyword Extraction](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/RAKE%20Method%20Figures):
    - Key Takeways: This method of analysis gives individual words and phrases scores based on their co-occurence with other words and the frequency of which they show up in the text. There were not major differences when comparing the "low" and "high" subsets of data. The phrases and words that had a good combinaiton of rake and frequency values did not seem to differ between the two subsets. 
 
-## REFERENCES Section
+## REFERENCES Section:
+1. A. Kon, “Linkedin Job Postings - 2023,” Kaggle, para. 1, Sept. 2023. [Online]. Available: https://www.kaggle.com/datasets/arshkon/linkedin-job-postings. [Accessed Sept. 15, 2023].
+2. “An Overview of Keyword Extraction Techniques,” R-bloggers, para. 3, April 2018. [Online]. Available: https://www.r-bloggers.com/2018/04/an-overview-of-keyword-extraction-techniques/. [Accessed Sept. 15, 2023].
+3. “udpipe: Tokenization, Parts of Speech Tagging, Lemmatization and Dependency Parsing with the 'UDPipe' 'NLP' Toolkit,” The R-Project for Statistical Computing, [Online]. Available:https://CRAN.R-project.org/package=udpipe. [Accessed Sept. 16, 2023].
+4. “textrank: Summarize Text by Ranking Sentences and Finding Keywords,”The R-Project for Statistical Computing, [Online]. Available:https://CRAN.R-project.org/package=textrank. [Accessed Sept. 16, 2023].
+
