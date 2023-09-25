@@ -25,7 +25,9 @@ the same data. The methods are as follows:
 ### Installing/Building Our Code:
 
 
-### Usuage of Our Code
+### Usuage of Our Code:
+1. The goal of this analysis were to provide the audience with key qualitative factors that may differientiate between Linkedin job postings that had a higher quantity of applications versus a lower quantity.
+
 
 
 ## [DATA Section](https://github.com/bridaviss/ProjectM1/tree/main/DATA):
