@@ -1,0 +1,115 @@
+---
+title: "DS4002_FINALM13"
+author: "Brizhay Davis"
+date: "2023-09-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Analysis of Word Cooccurences of Noun and Adjectives in the Same Sentence
+### Download the Packages Needed:
+
+```{r}
+library(udpipe)
+library(igraph)
+library(ggraph)
+library(ggplot2)
+```
+### Data Cleaning
+
+```{r}
+
+# I cleaned and subsetted my data slightly different, so in order for this analysis
+# code to run, you have to run the code in this chunk. It it subsetting the 
+# "jobs_df" dataset into 2 datasets, with one having a high quantity of 
+# applications and the other having a low quantity.
+
+# Subsetting the data to create a higher quantity of applies dataset:
+jobs_high <- jobs_df[jobs_df$applies_factor == "high",]
+
+# Subsetting the data to create a lower quantity of applies dataset:
+jobs_low <- jobs_df[jobs_df$applies_factor == "low",]
+```
+
+
+### Using the "udpipe" Package for Analysis:
+
+```{r}
+# The lines of code below downloads the model for analysis in english.
+nlp_model <- udpipe_download_model(language = "english")
+nlp_model <- udpipe_load_model(nlp_model$file_model)
+
+# This line of code annotates our text data for analysis. It parses through the 
+# text and tags each word, sentence, and paragraph to ready it for analysis.
+nlp_high <- udpipe_annotate(nlp_model, x = jobs_high$description) # higher quantity of applies
+nlp_low <- udpipe_annotate(nlp_model, x = jobs_low$description) # lower quantity of applies
+
+# This line of code makes the above annotation into a dataframe. 
+nlp_high <- as.data.frame(nlp_high) # for the higher quantity subset
+nlp_low <- as.data.frame(nlp_low) # for the lower quantity subset
+```
+
+
+
+### Co-occurence Frequency Analysis:
+
+```{r}
+
+# Now that this model has annotated our text data, we can look at the frequency
+# of the co-occurrence for key words in the text. The line of code below looks at 
+# the frequency of nouns and adjectives that follow each other in the same
+# sentence. The output of this function is a dataset, which gives the 
+# co-occurrence frequency of the two terms.
+
+# This is for the high quantity of applications subset:
+highapplies_cooc <- cooccurrence(x = subset(nlp_high, upos %in% c("NOUN", "ADJ")), 
+                     term = "lemma", 
+                     group = c("doc_id", "paragraph_id", "sentence_id"))
+
+# This is for the low quantity of applications subset:
+lowapplies_cooc <- cooccurrence(x = subset(nlp_low, upos %in% c("NOUN", "ADJ")), 
+                     term = "lemma", 
+                     group = c("doc_id", "paragraph_id", "sentence_id"))
+
+```
+
+
+### Graphic of Co-occurence Frequency of the Top Thirty Words:
+
+```{r}
+
+# For the graphics, I am only focusing on the top thirty words. This means the 
+# top 30 words that have the highest co-occurrence frequency. 
+high_graph <- highapplies_cooc[c(1:30),]
+high_graph <- graph_from_data_frame(high_graph)
+
+# With this graphic, I am making the co-occurrence frequency correlated to the
+# strength and width of the edges connecting the nodes. Therefore, if the 
+# frequency is higher, the edge will be wider and a deeper red color.
+
+# Graphic for higher quantity of applications subset:
+ggraph(high_graph, layout = "fr") +
+  geom_edge_link(aes(width = cooc, edge_alpha = cooc), edge_colour = "red") +
+  geom_node_text(aes(label = name), col = "black", size = 3, 
+                 family = "Arial Rounded MT Bold") +
+  theme_graph(base_family = "Arial Rounded MT Bold", base_size = 10)  +
+  labs(title = "Cooccurrence of Words in the Same Sentence", 
+       subtitle = "Nouns & Adjectives - High Quantity of Applications")
+
+
+# Graphic for lower quantity of applications subset:
+low_graph <- lowapplies_cooc[c(1:30),]
+low_graph <- graph_from_data_frame(low_graph)
+ggraph(low_graph, layout = "fr") +
+  geom_edge_link(aes(width = cooc, edge_alpha = cooc), edge_colour = "red") +
+  geom_node_text(aes(label = name), col = "black", size = 3, 
+                 family = "Arial Rounded MT Bold") +
+  theme_graph(base_family = "Arial Rounded MT Bold", base_size = 10) +
+  labs(title = "Cooccurrence of Words in the Same Sentence", 
+       subtitle = "Nouns & Adjectives - Low Quantity of Applications")
+
+```
+
