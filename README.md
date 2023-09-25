@@ -58,7 +58,7 @@ co-occurrence frequency data, it is already apart of the main file you will find
 ### Table of Contents:
 1. [Phrases Extraction](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/Phrases%20Method%20Figures):
    - Key Takeaways: 
-2. [Co-occurence Frequency]():
+2. [Co-occurence Frequency](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/Co-occurence%20Frequency):
    - Key Takeaways: 
 3. [Rapid Automatic Keyword Extraction](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/RAKE%20Method%20Figures):
    - Key Takeways:
