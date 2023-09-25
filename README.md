@@ -42,7 +42,7 @@ co-occurrence frequency data, it is already apart of the main file you will find
            - Click here for the [code](https://github.com/bridaviss/ProjectM1/blob/main/SRC/CooccurrenceFrequency.Rmd)
             
        5. Rapid Automatic Keyword Extraction
-            - Click here for the [code](https://github.com/bridaviss/ProjectM1/blob/main/SRC/RAKE_method_code.Rmd)
+            - Click here for the [code](https://github.com/bridaviss/ProjectM1/blob/main/SRC/RAKE_method_code_.Rmd)
               
    
 
