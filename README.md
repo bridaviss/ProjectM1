@@ -32,15 +32,15 @@ the same data. The methods are as follows:
 1. The goal of this analysis was to provide the audience with key qualitative factors that may differientiate Linkedin job postings that had a higher quantity of applications from a lower quantity of applications.
    - To do this, we performed three analyses:
        1. Phrases Extraction
-            - Code:
+            - CLick here for the [code]() 
             - 
        3. Co-occurence Frequency
-           - Code:
+           - Click here for the [code](https://github.com/bridaviss/ProjectM1/blob/main/SRC/LinkedInPhrasesAnalysis.Rmd)
            - 
        5. Rapid Automatic Keyword Extraction
-            - Code:
-            - 
-     
+            - Click here for the [code](https://github.com/bridaviss/ProjectM1/blob/main/SRC/RAKE_method_code.Rmd)
+              
+   
 
 
 
