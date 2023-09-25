@@ -60,7 +60,7 @@ co-occurrence frequency data, it is already apart of the main file you will find
    - Key Takeaways: 
 2. [Co-occurence Frequency]():
    - Key Takeaways: 
-3. [Rapid Automatic Keyword Extraction]():
+3. [Rapid Automatic Keyword Extraction](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES/RAKE%20Method%20Figures):
    - Key Takeways:
 
 ## REFERENCES Section
