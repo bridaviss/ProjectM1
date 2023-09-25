@@ -12,17 +12,17 @@ the same data. The methods are as follows:
 
 4. A reference section containing all acknolwedgments and references.
 
-## SRC Section:
+## [SRC Section](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
 ### Installing/Building Our Code:
 
 
 ### Usuage of Our Code
 
 
-## DATA Section
+## [DATA Section](https://github.com/bridaviss/ProjectM1/tree/main/DATA):
 
 
-## FIGURES Section
+## [FIGURES Section](https://github.com/bridaviss/ProjectM1/tree/main/FIGURES):
 
 
 ## REFERENCES Section
