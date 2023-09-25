@@ -26,7 +26,18 @@ the same data. The methods are as follows:
 
 
 ### Usuage of Our Code:
-1. The goal of this analysis were to provide the audience with key qualitative factors that may differientiate between Linkedin job postings that had a higher quantity of applications versus a lower quantity.
+1. The goal of this analysis was to provide the audience with key qualitative factors that may differientiate Linkedin job postings that had a higher quantity of applications from a lower quantity of applications.
+   - To do this, we performed three analyses:
+       1. Phrases Extraction
+            - Code:
+            - 
+       3. Co-occurence Frequency
+           - Code:
+           - 
+       5. Rapid Automatic Keyword Extraction
+            - Code:
+            - 
+     
 
 
 
