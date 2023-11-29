@@ -32,7 +32,7 @@ The data cleaning for the co-occurrence frequency method is slightly different: 
 co-occurrence frequency data, it is already apart of the main file you will find below in the Usage of Our Code section. 
 
 
-### [Usuage of Our Code](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
+### [Usage of Our Code](https://github.com/bridaviss/ProjectM1/tree/main/SRC):
 1. The goal of this analysis was to provide the audience with key qualitative factors that may differientiate Linkedin job postings that had a higher quantity of applications from a lower quantity of applications.
    - To do this, we performed three analyses:
        1. Phrases Extraction
